@@ -7,7 +7,7 @@ name: Build
 on:
   push:
     branches:
-      - master
+      - dev
 
 # Workflow's jobs
 jobs:
@@ -53,4 +53,3 @@ jobs:
           npm run release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          key:  
