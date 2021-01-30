@@ -123,6 +123,7 @@ interface IBounds {
 type ICtx = import('picgo')
 interface IPicGoPlugin {
   name: string
+  fullName: string
   author: string
   description: string
   logo: string
@@ -145,6 +146,7 @@ interface IPicGoPlugin {
 
 interface IPluginMenuConfig {
   name: string
+  fullName?: string
   config: any[]
 }
 
@@ -279,3 +281,9 @@ interface IUpYunConfig {
 }
 
 type ILoggerType = string | Error | boolean | number | undefined
+
+interface IAppNotification {
+  title: string
+  body: string
+  icon?: string
+}

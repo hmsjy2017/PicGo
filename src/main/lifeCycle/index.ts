@@ -1,7 +1,9 @@
 import {
   app,
   globalShortcut,
-  protocol
+  protocol,
+  dialog,
+  Notification
 } from 'electron'
 import {
   createProtocol,
@@ -54,9 +56,7 @@ class LifeCycle {
       }
       windowManager.create(IWindowList.TRAY_WINDOW)
       windowManager.create(IWindowList.SETTING_WINDOW)
-      if (process.platform === 'darwin' || process.platform === 'win32') {
-        createTray()
-      }
+      createTray()
       db.set('needReload', false)
       updateChecker()
       // 不需要阻塞
@@ -73,6 +73,14 @@ class LifeCycle {
             const win = windowManager.getAvailableWindow()
             uploadChoosedFiles(win.webContents, files)
           }
+        }
+      }
+
+      if (global.notificationList?.length > 0) {
+        while (global.notificationList.length) {
+          const option = global.notificationList.pop()
+          const notice = new Notification(option!)
+          notice.show()
         }
       }
     })
